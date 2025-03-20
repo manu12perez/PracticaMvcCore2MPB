@@ -35,7 +35,7 @@ namespace PracticaMvcCore2MPB.Repositories
                 .ToListAsync();
         }
 
-        public async Task Carrito(int idUsuario, List<Pedido> pedidos)
+        public async Task Pedido(int idUsuario, List<Pedido> pedidos)
         {
             foreach(var pedido in pedidos)
             {

@@ -1,0 +1,19 @@
+﻿@using PracticaMvcCore2MPB.Extensions
+@{
+    List<int> listaLibros = Context.Session.GetObject<List<int>>("CARRITO");
+    int libros = 0;
+    if (listaLibros != null) libros = listaLibros.Count();
+}
+<li class="nav-item">
+    <span class="nav-link">
+        En carrito: @libros
+    </span>
+</li>
+@if (libros > 0)
+{
+        <li class="nav-item">
+            <a asp-controller="Libros" asp-action="Carrito" class="nav-link">
+                Carrito
+            </a>
+        </li>
+}

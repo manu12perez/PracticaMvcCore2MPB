@@ -1,42 +1,56 @@
-﻿@model List<PracticaMvcCore2MPB.Models.Libro>
+﻿@model VistaCompra
 
 <h1>Carrito Libros</h1>
 
-@if (Model.Count == 0)
-{
-    <p>No hay libros añadidos.</p>
-}
-else
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Autor</th>
-                <th>Portada</th>
-                <th>Cantidad</th>
-                <th>#</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var libro in Model)
-            {
-                <tr>
-                    <td>@libro.Titulo</td>
-                    <td>@libro.Autor</td>
-                    <td><img src="@libro.Portada" style="height:200px;width:150px" /></td>
-                    <td>@ViewBag.CantidadPorLibro[libro.IdLibro]</td>
-                    <td>
-                        <a asp-action="EliminarLibro" asp-route-idlibro="@libro.IdLibro" class="btn btn-danger">
-                            Eliminar
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<h1>Carrito</h1>
+<p>
+	<a class="btn btn-danger" asp-controller="Libros" asp-action="VaciarCarrito">
+		Vaciar carrito
+	</a>
+</p>
+<h2>@Model.total €</h2>
+<form method="post" asp-action="ComprarCarrito" asp-controller="Libros">
+	@foreach (var libro in Model.carritoCompra)
+	{
+		<input type="hidden" name="IdsCubo[]" value="@libro.libro.IdLibro" />
+		<input type="hidden" name="Cantidades[]" value="@libro.cantidad" />
+	}
+	<button type="submit" class="btn btn-success">Comprar</button>
+</form>
 
-    <form asp-action="ConfirmarReclutados" method="post">
-        <button type="submit" class="btn btn-success">Confirmar Reclutamiento</button>
-    </form>
-}
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Título</th>
+			<th>Autor</th>
+			<th>Editorial</th>
+			<th>Portada</th>
+			<th>Precio</th>
+			<th>Cantidad</th>
+			<th>Acciones</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (CarritoCompra libro in Model.carritoCompra)
+		{
+			<tr>
+				<td>@libro.libro.Titulo</td>
+				<td>@libro.libro.Autor</td>
+				<td>@libro.libro.Editorial</td>
+				<td>
+					<img src="~/images/@libro.libro.Portada" alt="@libro.libro.Titulo" width="100">
+				</td>
+				<td>@libro.libro.Precio €</td>
+				<td>@libro.cantidad</td>
+				<td>
+
+					<a class="btn btn-danger"
+					   asp-controller="Libros" asp-action="DeleteLibroCarrito"
+					   asp-route-idlibro="@libro.libro.IdLibro">
+						Eliminar
+					</a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

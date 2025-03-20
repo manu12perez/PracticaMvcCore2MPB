@@ -1,0 +1,25 @@
+﻿@model PracticaMvcCore2MPB.Models.Usuario
+
+@{
+    var pedidos = ViewData["PEDIDOS"] as List<Pedido>;
+}
+<h2>Perfil de @Model.Nombre</h2>
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="~/images/@Model.Foto" class="img-fluid rounded-start" alt="Foto de usuario">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Nombre</h5>
+                <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Libros Comprados</h3>
+
+
+

@@ -25,13 +25,7 @@
                 Portada
             </th>
             <th>
-                Resumen
-            </th>
-            <th>
                 Precio
-            </th>
-            <th>
-                Id Genero
             </th>
             <th></th>
         </tr>
@@ -52,23 +46,17 @@
                 @libro.Editorial
             </td>
             <td>
-                <img src="@libro.Portada" style="height:200px;width:150px" />
-            </td>
-            <td>
-                @libro.Resumen
+                <img src="~/images/@libro.Portada" style="height:200px;width:150px" />
             </td>
             <td>
                 @libro.Precio €
             </td>
             <td>
-                @libro.IdGenero
-            </td>
-            <td>
                 <a asp-controller="Libros"
-                asp-action="Details"
-                asp-route-idlibro="@libro.IdLibro"
-                class="btn btn-info">
-                Details
+                    asp-action="Details"
+                    asp-route-idlibro="@libro.IdLibro"
+                    class="btn btn-info">
+                    Details
                 </a>
             </td>
         </tr>
